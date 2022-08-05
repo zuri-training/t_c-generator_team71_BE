@@ -1,9 +1,11 @@
 from rest_framework import serializers
+from django.conf import settings
 
 from .models import User
 
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.core.mail import send_mail
 
 from p_p.serializers import GetPrivacyPolicySerializer
 from t_c.serializers import GetTCSerializer
@@ -21,7 +23,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             'email',
             'id',
             'tokens',
-            'password'
+            'password',
         ]
 
     def get_tokens(self, user):
@@ -38,7 +40,9 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(validated_data.get('email'),
                                         validated_data.get('password'),
                                         first_name=validated_data.get('first_name'),
-                                        last_name=validated_data.get('last_name'))
+                                        last_name=validated_data.get('last_name'),
+                                        subscribed_to_newsletter=
+                                        validated_data.get('subscribed_to_newsletter'))
         return user
 
 
@@ -93,3 +97,20 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
     def get_return_data(self, data):
         return {'success': True}
+
+
+class SendMailSerializer(serializers.Serializer):
+    email = serializers.EmailField(write_only=True)
+
+    def save(self):
+        email = self.validated_data['email']
+        message = "you have registered for termbuddy newsletter \n" \
+                  "Stay tuned for updates"
+        send_mail(
+            "Termbuddy Newsletter",
+            message,
+            settings.EMAIL_HOST_USER,
+            [email],
+            fail_silently=False
+        )
+        return {'status': 'sent'}

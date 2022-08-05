@@ -68,3 +68,5 @@ class User(AbstractUser):
             fail_silently=False,
         )
         print('message sent')
+
+
