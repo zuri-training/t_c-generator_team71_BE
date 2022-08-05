@@ -40,9 +40,8 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(validated_data.get('email'),
                                         validated_data.get('password'),
                                         first_name=validated_data.get('first_name'),
-                                        last_name=validated_data.get('last_name'),
-                                        subscribed_to_newsletter=
-                                        validated_data.get('subscribed_to_newsletter'))
+                                        last_name=validated_data.get('last_name')
+                                        )
         return user
 
 
