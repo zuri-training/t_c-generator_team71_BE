@@ -14,8 +14,10 @@ import os
 import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
+import django_heroku
 
 import environ
+
 # Initialise environment variables
 env = environ.Env()
 environ.Env.read_env()
@@ -33,7 +35,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.getenv("DEBUG", "False") == "True"
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 # DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
@@ -62,6 +64,7 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -151,8 +154,14 @@ sqlite_DB = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# DATABASES = postgresql_DB
-DATABASES = sqlite_DB
+Deployed_DB = {
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL'))
+}
+if DEBUG:
+    DATABASES = postgresql_DB
+
+# DATABASES = sqlite_DB
 
 # if DEVELOPMENT_MODE is True:
 #     DATABASES = {
@@ -211,3 +220,5 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=3),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
 }
+
+django_heroku.settings(locals())

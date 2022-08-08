@@ -1,0 +1,1 @@
+web: gunicorn terms_gen_home.wsgi --log-file -
