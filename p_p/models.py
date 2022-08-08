@@ -1,4 +1,6 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
+
 
 # Create your models here.
 
@@ -20,7 +22,8 @@ class PrivacyPolicy(models.Model):
     # marketing_services = models.CharField(max_length=300, null=True, blank=True)
     # tracking_services = models.CharField(max_length=300, null=True, blank=True)
     # captcha_service = models.CharField(max_length=300, null=True, blank=True)
-    # contact_info = models.EmailField(null=True, blank=True)
+    contact_email = models.EmailField(null=True, blank=True)
+    contact_phone = PhoneNumberField(null=True, blank=True)
     consent = models.BooleanField(null=True, blank=True)
     info_we_collect = models.BooleanField(null=True, blank=True)
     how_we_use_info = models.BooleanField(null=True, blank=True)
