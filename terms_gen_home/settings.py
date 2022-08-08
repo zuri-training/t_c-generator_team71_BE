@@ -76,7 +76,16 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'terms_gen_home.urls'
 CORS_URLS_REGEX = r"^/api/.*"
-CORS_ALLOWED_ORIGINS = []
+# CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS = env[
+        # add allowed origins here
+        'http://127.0.0.1:5500',
+        'http://127.0.0.1:3000',
+        'http://127.0.0.1:5500',
+        'http://127.0.0.1:5501',
+        'https://abshaibu.github.io/test-P71',
+    ]
+
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True
@@ -88,15 +97,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 # STATIC_URL = "/static/"
 # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-if DEBUG:
-    CORS_ALLOWED_ORIGINS += [
-        # add allowed origins here
-        'http://127.0.0.1:5500',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:5500',
-        'http://127.0.0.1:5501',
-
-    ]
+# if DEBUG:
 
 auth_classes = [
     'rest_framework.authentication.BasicAuthentication',
