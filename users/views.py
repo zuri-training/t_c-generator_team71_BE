@@ -18,11 +18,7 @@ class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
 
-    def perform_create(self, serializer):
-        user = serializer.save()
-        print(user.subscribed_to_newsletter)
-        if user.subscribed_to_newsletter:
-            user.send_newspaper_mail()
+
 
 
 class GetUserDetailAPIView(generics.RetrieveAPIView):
@@ -42,11 +38,6 @@ class UpdateUserDetailAPIView(generics.UpdateAPIView):
     serializer_class = GetUserSerializer
     lookup_field = 'pk'
     permission_classes = [permissions.IsAuthenticated, IsUser]
-
-    def perform_update(self, serializer):
-        user = serializer.save()
-        if user.subscribed_to_newsletter:
-            user.send_newspaper_mail()
 
 
 class DeleteUserAPIView(generics.DestroyAPIView):
