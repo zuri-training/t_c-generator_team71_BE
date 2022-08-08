@@ -160,6 +160,8 @@ Deployed_DB = {
 }
 if DEBUG:
     DATABASES = postgresql_DB
+else:
+    DATABASES = Deployed_DB
 
 # DATABASES = sqlite_DB
 
