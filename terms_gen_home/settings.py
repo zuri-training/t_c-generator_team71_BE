@@ -77,7 +77,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'terms_gen_home.urls'
 CORS_URLS_REGEX = r"^/api/.*"
 # CORS_ALLOWED_ORIGINS = []
-CORS_ALLOWED_ORIGINS = env[
+CORS_ALLOWED_ORIGINS = [
         # add allowed origins here
         'http://127.0.0.1:5500',
         'http://127.0.0.1:3000',
