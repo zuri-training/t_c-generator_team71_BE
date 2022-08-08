@@ -7,6 +7,8 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.mail import send_mail
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 from p_p.serializers import GetPrivacyPolicySerializer
 from t_c.serializers import GetTCSerializer
 
@@ -113,3 +115,5 @@ class SendMailSerializer(serializers.Serializer):
             fail_silently=False
         )
         return {'status': 'sent'}
+
+

@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions, status
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 # Create your views here.
 from .models import User
@@ -64,3 +65,5 @@ class ChangePasswordAPIView(generics.UpdateAPIView):
 
 class SendNewsLetterAPIView(generics.CreateAPIView):
     serializer_class = SendMailSerializer
+
+
