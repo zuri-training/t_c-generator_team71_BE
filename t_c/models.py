@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 from users.models import User
 
@@ -19,6 +20,8 @@ class Terms(models.Model):
     # use_feedback = models.BooleanField(null=True, blank=True)
     # contact_info = models.EmailField(null=True, blank=True)
     # age_limit = models.IntegerField(null=True, blank=True, default=13)
+    contact_email = models.EmailField(null=True, blank=True)
+    contact_phone = PhoneNumberField(null=True, blank=True)
     cookies = models.BooleanField(null=True, blank=True)
     licenses = models.BooleanField(null=True, blank=True)
     content_liability = models.BooleanField(null=True, blank=True)
