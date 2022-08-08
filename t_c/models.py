@@ -12,7 +12,7 @@ class Terms(models.Model):
     user_id = models.ForeignKey(User, related_name='terms', on_delete=models.CASCADE)
     business_name = models.CharField(max_length=200, null=True, blank=True)
     business_url = models.URLField(unique=True)
-    document_name = models.CharField(null=True, blank=True)
+    document_name = models.CharField(null=True, blank=True, max_length=224)
     contact_email = models.EmailField(null=True, blank=True)
     contact_phone = PhoneNumberField(null=True, blank=True)
     cookies = models.BooleanField(null=True, blank=True)
