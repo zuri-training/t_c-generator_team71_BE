@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:pk>/delete-profile/', views.DeleteUserAPIView.as_view(), name='delete-profile'),
     path('<int:pk>/change-password/', views.ChangePasswordAPIView.as_view(), name='change-password'),
     path('newsletter/', views.SendNewsLetterAPIView.as_view(), name='send-newsletter'),
+    path('obtain-token/', views.MyTokenObtainPairView.as_view(), name='my-obtain-token'),
 ]

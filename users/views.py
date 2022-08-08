@@ -4,7 +4,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # Create your views here.
 from .models import User
 from .serializers import (GetUserSerializer, GetUserDocumentsSerializer,
-                          RegisterUserSerializer, ChangePasswordSerializer, SendMailSerializer)
+                          RegisterUserSerializer, ChangePasswordSerializer, SendMailSerializer,
+                          MyTokenObtainPairSerializer)
 from .permissions import IsUser
 
 
@@ -47,6 +48,8 @@ class DeleteUserAPIView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, IsUser]
 
 
+
+
 class ChangePasswordAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordSerializer
@@ -57,4 +60,5 @@ class ChangePasswordAPIView(generics.UpdateAPIView):
 class SendNewsLetterAPIView(generics.CreateAPIView):
     serializer_class = SendMailSerializer
 
-
+class MyTokenObtainPairView(generics.CreateAPIView):
+    serializer_class = MyTokenObtainPairSerializer
