@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.conf import settings
+from django.contrib.auth import authenticate
+
 
 from .models import User
 
@@ -115,5 +117,30 @@ class SendMailSerializer(serializers.Serializer):
             fail_silently=False
         )
         return {'status': 'sent'}
+
+
+class MyTokenObtainPairSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    email = serializers.EmailField(write_only=True)
+    tokens = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['id',
+                  'tokens',
+                  'email',
+                  'password']
+
+    def get_tokens(self, user):
+        refresh = RefreshToken.for_user(user)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+    def create(self, validated_data):
+        user = authenticate(email=validated_data['email'], password=validated_data['password'])  # check for email and password
+        if not user:  # check for phone
+            raise serializers.ValidationError({'detail': 'Incorrect email or password'})
+        return user
 
 
