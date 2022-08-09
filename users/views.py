@@ -4,7 +4,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 # Create your views here.
 from .models import User
 from .serializers import (GetUserSerializer, GetUserDocumentsSerializer,
-                          RegisterUserSerializer, ChangePasswordSerializer, SendMailSerializer)
+                          RegisterUserSerializer, ChangePasswordSerializer, SendMailSerializer,
+                          MyTokenObtainPairSerializer)
 from .permissions import IsUser
 
 
@@ -18,11 +19,7 @@ class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterUserSerializer
 
-    def perform_create(self, serializer):
-        user = serializer.save()
-        print(user.subscribed_to_newsletter)
-        if user.subscribed_to_newsletter:
-            user.send_newspaper_mail()
+
 
 
 class GetUserDetailAPIView(generics.RetrieveAPIView):
@@ -43,17 +40,14 @@ class UpdateUserDetailAPIView(generics.UpdateAPIView):
     lookup_field = 'pk'
     permission_classes = [permissions.IsAuthenticated, IsUser]
 
-    def perform_update(self, serializer):
-        user = serializer.save()
-        if user.subscribed_to_newsletter:
-            user.send_newspaper_mail()
-
 
 class DeleteUserAPIView(generics.DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = GetUserSerializer
     lookup_field = 'pk'
     permission_classes = [permissions.IsAuthenticated, IsUser]
+
+
 
 
 class ChangePasswordAPIView(generics.UpdateAPIView):
@@ -66,4 +60,5 @@ class ChangePasswordAPIView(generics.UpdateAPIView):
 class SendNewsLetterAPIView(generics.CreateAPIView):
     serializer_class = SendMailSerializer
 
-
+class MyTokenObtainPairView(generics.CreateAPIView):
+    serializer_class = MyTokenObtainPairSerializer
