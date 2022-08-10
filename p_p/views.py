@@ -15,9 +15,10 @@ class PPCreateAPIView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
-        print(self.request.user)
         if serializer.is_valid():
-            serializer.save(user_id=self.request.user, create_date=timezone.datetime.now(), last_edit=timezone.datetime.now())
+            serializer.save(user_id=self.request.user,
+                            create_date=timezone.datetime.now(),
+                            last_edit=timezone.datetime.now())
 
 
 class GetPPDetailAPIView(generics.RetrieveAPIView):

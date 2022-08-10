@@ -20,8 +20,6 @@ class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = RegisterUserSerializer
 
 
-
-
 class GetUserDetailAPIView(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = GetUserSerializer
@@ -48,8 +46,6 @@ class DeleteUserAPIView(generics.DestroyAPIView):
     permission_classes = [permissions.IsAuthenticated, IsUser]
 
 
-
-
 class ChangePasswordAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordSerializer
@@ -59,6 +55,7 @@ class ChangePasswordAPIView(generics.UpdateAPIView):
 
 class SendNewsLetterAPIView(generics.CreateAPIView):
     serializer_class = SendMailSerializer
+
 
 class MyTokenObtainPairView(generics.CreateAPIView):
     serializer_class = MyTokenObtainPairSerializer
