@@ -54,7 +54,7 @@ class User(AbstractUser):
         #     # instance.request.build_absolute_uri(reverse('password_reset:reset-password-confirm')),
         #     "https://netlify.com",
         #     reset_password_token.key)
-        email_plaintext_message = f"https://netlify.com#{reset_password_token.key}"
+        email_plaintext_message = f"https://abshaibu.github.io/test-P71/reset.html#{reset_password_token.key}"
 
         send_mail(
             # title:

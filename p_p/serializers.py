@@ -12,3 +12,4 @@ class GetPrivacyPolicySerializer(serializers.ModelSerializer):
     class Meta:
         model = PrivacyPolicy
         fields = '__all__'
+
