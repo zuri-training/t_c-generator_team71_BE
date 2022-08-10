@@ -1,0 +1,8 @@
+- Database Schema - https://github.com/zuri-training/t_c-generator-team71/issues/9
+- API documentation guide - https://github.com/zuri-training/t_c-generator-team71/issues/20
+- Create User/Authentication/Models - https://github.com/zuri-training/t_c-generator-team71/issues/8
+- Create user/Auth endpoints - https://github.com/zuri-training/t_c-generator-team71/issues/145
+- Create all privacy policies endpoints - https://github.com/zuri-training/t_c-generator-team71/issues/146
+- Create all terms and conditions enpoints - https://github.com/zuri-training/t_c-generator-team71/issues/147
+- Create newsletter endpoint - https://github.com/zuri-training/t_c-generator-team71/issues/148
+- Create forgot Password/ reset password endpoint - https://github.com/zuri-training/t_c-generator-team71/issues/149
