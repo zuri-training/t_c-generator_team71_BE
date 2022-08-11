@@ -14,11 +14,11 @@ class PrivacyPolicy(models.Model):
     This is the model for the terms and conditions template
     """
     user_id = models.ForeignKey(User, related_name='privacy_policies', on_delete=models.CASCADE)
-    business_name = models.CharField(max_length=200, null=True, blank=True)
+    business_name = models.CharField(max_length=200, null=False, blank=False)
     business_url = models.URLField(unique=True)
-    document_name = models.CharField(null=True, blank=True, max_length=224)
-    contact_email = models.EmailField(null=True, blank=True)
-    contact_phone = PhoneNumberField(null=True, blank=True)
+    document_name = models.CharField(null=False, blank=False, max_length=224)
+    contact_email = models.EmailField(null=False, blank=False)
+    contact_phone = PhoneNumberField(null=False, blank=False)
     consent = models.BooleanField(null=True, blank=True)
     info_we_collect = models.BooleanField(null=True, blank=True)
     how_we_use_info = models.BooleanField(null=True, blank=True)
