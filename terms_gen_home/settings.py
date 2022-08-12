@@ -145,8 +145,8 @@ postgresql_DB = {
         'NAME': 'nginxdb',
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5433',
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': '',
     }
 }
 sqlite_DB = {
