@@ -14,7 +14,7 @@ import os
 import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
-import django_heroku
+# import django_heroku
 
 import environ
 
@@ -94,8 +94,8 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = env('EMAIL')
 EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 
-# STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # if DEBUG:
 
@@ -142,11 +142,11 @@ WSGI_APPLICATION = 'terms_gen_home.wsgi.application'
 postgresql_DB = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'termsbuddy',
+        'NAME': 'nginxdb',
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': 'localhost',
-        'PORT': '',
+        'PORT': '5433',
     }
 }
 sqlite_DB = {
@@ -155,14 +155,14 @@ sqlite_DB = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-Deployed_DB = {
-    'default': dj_database_url.config(
-        default=env('DATABASE_URL'))
-}
+# Deployed_DB = {
+#     'default': dj_database_url.config(
+#         default=env('DATABASE_URL'))
+# }
 # if DEBUG:
-#     DATABASES = postgresql_DB
+DATABASES = postgresql_DB
 # else:
-DATABASES = Deployed_DB
+# DATABASES = Deployed_DB
 
 # DATABASES = sqlite_DB
 
@@ -224,4 +224,4 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
 }
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
