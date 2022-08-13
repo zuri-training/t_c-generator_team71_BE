@@ -13,15 +13,11 @@ The Major environment variables include:
 - POSTGRES_USER - the user created for the postgres database
 - POSTGRES_PASSWORD - the password created for the postgres database
 ## Folder Structure
-+--+
-| |+p_p This folder/app contains all the logic for generating privacy policies
-+--+
-| |+staticfiles This folder contains all the staticfiles
-| |+t_c This folder/app contains all the logic for generating terms and conditions
-+--+
-| |+terms_gen_home This is the main project folder that contains project settings, urls and configurations
-+--+
-| |+users This folder/app contains all the logic for the accounts/authorizations/permissions.
+- p_p This folder/app contains all the logic for generating privacy policies
+- staticfiles This folder contains all the staticfiles
+- t_c This folder/app contains all the logic for generating terms and conditions
+- terms_gen_home This is the main project folder that contains project settings, urls and configurations
+- users This folder/app contains all the logic for the accounts/authorizations/permissions.
 ## Starting the project
 - Fork and clone the repo
 - create and activate virtual environment [Guide](https://www.freecodecamp.org/news/how-to-setup-virtual-environments-in-python/).
