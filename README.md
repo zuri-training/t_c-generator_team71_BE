@@ -7,8 +7,8 @@ This project makes use of the REST Architecture using Django Rest Framework
 - You should have knowledge of django rest framework, API creation, serialization etc
 ## Environment Variables
 The Major environment variables include:
-- EMAIL - 
-- EMAIL_PASSWORD -
+- EMAIL - termbuddy71@gmail.com
+- EMAIL_PASSWORD - gr0updroj3ct
 - SECRET_KEY - django secret key
 - POSTGRES_USER - the user created for the postgres database
 - POSTGRES_PASSWORD - the password created for the postgres database
