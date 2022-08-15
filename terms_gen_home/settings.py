@@ -36,6 +36,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 # DEBUG = os.getenv("DEBUG", "False") == "True"
 DEBUG = False
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+# ALLOWED_HOSTS = ["*"]
 
 # Application definition
 AUTH_USER_MODEL = 'users.User'
@@ -76,15 +77,15 @@ ROOT_URLCONF = 'terms_gen_home.urls'
 CORS_URLS_REGEX = r"^/api/.*"
 # CORS_ALLOWED_ORIGINS = []
 CORS_ALLOWED_ORIGINS = [
-        # add allowed origins here
-        'http://127.0.0.1:5500',
-        'http://127.0.0.1:3000',
-        'http://127.0.0.1:5500',
-        'http://127.0.0.1:5501',
-        'https://abshaibu.github.io',
-        'https://termbuddy.io',
-        'https://zuri-training.github.io',
-    ]
+    # add allowed origins here
+    'http://127.0.0.1:5500',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:5500',
+    'http://127.0.0.1:5501',
+    'https://abshaibu.github.io',
+    'https://termbuddy.io',
+    'https://zuri-training.github.io',
+]
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -93,7 +94,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = env('EMAIL')
 EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
-
 
 auth_classes = [
     # 'rest_framework.authentication.BasicAuthentication',
@@ -157,6 +157,7 @@ Deployed_DB = {
 }
 
 DATABASES = Deployed_DB
+# DATABASES = sqlite_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -203,3 +204,36 @@ SIMPLE_JWT = {
 }
 
 django_heroku.settings(locals())
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'mysite.log',
+            'formatter': 'verbose'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'MYAPP': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
