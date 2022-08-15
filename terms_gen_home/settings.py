@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from datetime import timedelta
 import os
-import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
 import django_heroku
@@ -37,7 +36,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 # DEBUG = os.getenv("DEBUG", "False") == "True"
 DEBUG = False
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 # Application definition
 AUTH_USER_MODEL = 'users.User'
@@ -84,6 +82,8 @@ CORS_ALLOWED_ORIGINS = [
         'http://127.0.0.1:5500',
         'http://127.0.0.1:5501',
         'https://abshaibu.github.io',
+        'https://termbuddy.io',
+        'https://zuri-training.github.io',
     ]
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -94,14 +94,10 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = env('EMAIL')
 EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
 
-# STATIC_URL = "/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-# if DEBUG:
 
 auth_classes = [
-    'rest_framework.authentication.BasicAuthentication',
-    'rest_framework.authentication.SessionAuthentication',
+    # 'rest_framework.authentication.BasicAuthentication',
+    # 'rest_framework.authentication.SessionAuthentication',
     'rest_framework_simplejwt.authentication.JWTAuthentication',
 ]
 
@@ -159,26 +155,6 @@ Deployed_DB = {
     'default': dj_database_url.config(
         default=env('DATABASE_URL'))
 }
-# if DEBUG:
-#     DATABASES = postgresql_DB
-# else:
-DATABASES = Deployed_DB
-
-# DATABASES = sqlite_DB
-
-# if DEVELOPMENT_MODE is True:
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": "django.db.backends.sqlite3",
-#             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-#         }
-#     }
-# elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-#     if os.getenv("DATABASE_URL", None) is None:
-#         raise Exception("DATABASE_URL environment variable not defined")
-#     DATABASES = {
-#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-#     }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

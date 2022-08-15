@@ -50,11 +50,10 @@ class User(AbstractUser):
             :param kwargs:
             :return:
             """
-        # email_plaintext_message = "{}#{}".format(
-        #     # instance.request.build_absolute_uri(reverse('password_reset:reset-password-confirm')),
-        #     "https://netlify.com",
-        #     reset_password_token.key)
-        email_plaintext_message = f"https://abshaibu.github.io/test-P71/reset.html#{reset_password_token.key}"
+
+        email_plaintext_message = f"https://zuri-training.github.io" \
+                                  f"/t_c-generator-team71" \
+                                  f"/reset.html#{reset_password_token.key}"
 
         send_mail(
             # title:
