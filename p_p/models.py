@@ -15,7 +15,7 @@ class PrivacyPolicy(models.Model):
     """
     user_id = models.ForeignKey(User, related_name='privacy_policies', on_delete=models.CASCADE)
     business_name = models.CharField(max_length=200, null=False, blank=False)
-    business_url = models.URLField(unique=True)
+    business_url = models.URLField(null=False, blank=False)
     document_name = models.CharField(null=False, blank=False, max_length=224)
     contact_email = models.EmailField(null=False, blank=False)
     contact_phone = PhoneNumberField(null=False, blank=False)
