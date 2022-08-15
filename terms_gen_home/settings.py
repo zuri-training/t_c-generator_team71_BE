@@ -151,13 +151,13 @@ sqlite_DB = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-# Deployed_DB = {
-#     'default': dj_database_url.config(
-#         default=env('DATABASE_URL'))
-# }
+Deployed_DB = {
+    'default': dj_database_url.config(
+        default=env('DATABASE_URL'))
+}
 
-# DATABASES = Deployed_DB
-DATABASES = sqlite_DB
+DATABASES = Deployed_DB
+# DATABASES = sqlite_DB
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
