@@ -2,7 +2,6 @@ from rest_framework import serializers
 from django.conf import settings
 from django.contrib.auth import authenticate
 
-
 from .models import User
 
 from django.contrib.auth.password_validation import validate_password
@@ -105,6 +104,31 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         return {'success': True}
 
 
+class CheckPasswordSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True,
+                                     required=True,
+                                     validators=[validate_password])
+    return_data = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['password',
+                  'return_data']
+
+    def validate(self, data):
+        if not self.context['request'].user.check_password(data.get('password')):
+            raise serializers.ValidationError({'password': 'incorrect password'})
+        return data
+
+    def update(self, instance, validated_data):
+        # instance.set_password(validated_data['new_password'])
+        # instance.save()
+        return instance
+
+    def get_return_data(self, data):
+        return {'success': True}
+
+
 class SendMailSerializer(serializers.Serializer):
     email = serializers.EmailField(write_only=True)
 
@@ -140,10 +164,10 @@ class MyTokenObtainPairSerializer(serializers.ModelSerializer):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }
+
     def create(self, validated_data):
-        user = authenticate(email=validated_data['email'], password=validated_data['password'])  # check for email and password
+        user = authenticate(email=validated_data['email'],
+                            password=validated_data['password'])  # check for email and password
         if not user:  # check for phone
             raise serializers.ValidationError({'detail': 'Incorrect email or password'})
         return user
-
-
